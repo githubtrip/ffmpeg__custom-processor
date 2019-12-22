@@ -41,7 +41,7 @@ CSVFOLDER='./1_input_raw_videos'
 
 # CSVFILE
 # This is the CSV to output the folder listing into.
-CSVFILE='./list/list.csv'
+CSVFILE='./list.csv'
 
 # CSVDEFAULTSTART
 # This is the default start time (-ss flag on ffmpeg) to use for the video
