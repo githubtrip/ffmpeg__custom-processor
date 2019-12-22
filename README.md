@@ -59,3 +59,16 @@ process.
 The config file will allow you to customise the folder locations, filenames and default
 CSV rows. Also allows you to set whether the intermediate files are deleted and the output
 files are overwritten.
+
+## list.csv
+
+This `list.csv` file that is created at the intermediate step is used for any renaming / cutting
+purposes. The columns are as follows:
+
+| filename | start seek point | duration of video | output filename |
+| --- | --- | --- | --- |
+| filename1.mp4 | 0 | 60 | newfile
+
+## Output
+
+The output format is .mov so that iPhone compatibility is at maximum.

@@ -64,11 +64,11 @@ INTDURATION=$(($DURATION+3))
 
 # OVERWRITE
 if [ $OVERWRITE = "true" ]; then
-  rm $OUTFOLDER/$OUTPUTBASENAME.out.mov
+  rm $OUTFOLDER/$OUTPUTBASENAME.out.$OUTFORMAT
 fi
 
 # Delete the intermediate.
-rm $INTFOLDER/$OUTPUTBASENAME.int.mov
+rm $INTFOLDER/$OUTPUTBASENAME.int.$OUTFORMAT
 
 # Stage-1
 # ENCODE intermediate video file with watermark over it & scale it down.
@@ -85,7 +85,7 @@ ffmpeg -hide_banner \
     -c:a copy \
     -t $INTDURATION \
     -nostdin \
-    -shortest $INTFOLDER/$OUTPUTBASENAME.int.mov
+    -shortest $INTFOLDER/$OUTPUTBASENAME.int.$OUTFORMAT
 
 # Stage-2
 # STREAM & Trim/cut the intermediate file to required duration
@@ -93,16 +93,16 @@ ffmpeg -hide_banner \
 # This will be a FAST process.
 ffmpeg -hide_banner \
     -ss $STARTTIME \
-    -i $INTFOLDER/$OUTPUTBASENAME.int.mov \
+    -i $INTFOLDER/$OUTPUTBASENAME.int.$OUTFORMAT \
     -c:v copy \
     -c:a copy \
     -t $DURATION \
     -nostdin \
-    -shortest $OUTFOLDER/$OUTPUTBASENAME.out.mov
+    -shortest $OUTFOLDER/$OUTPUTBASENAME.out.$OUTFORMAT
 
 # Remove intermediate
 if [ $DELINT = "true" ]; then
-  rm $INTFOLDER/$OUTPUTBASENAME.int.mov
+  rm $INTFOLDER/$OUTPUTBASENAME.int.$OUTFORMAT
 fi
 
 exit 0
