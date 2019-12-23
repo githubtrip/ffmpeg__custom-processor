@@ -2,3 +2,7 @@
 2_output_instagram_videos
 src/intermediate_videos
 *.csv
+*.mp4
+*.m4v
+*.mov
+.DS_Store

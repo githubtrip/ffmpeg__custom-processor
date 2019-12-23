@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # SOURCE The config file.
-. ./config
+. ./config.conf
 
 # Take Arguments.
 if [ "$#" -ne 0 ]; then
-  echo "Single run"
+  echo "Single run "
   $WATCHCOMMAND
 else
   # Watch $DIR folder for changes.

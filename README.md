@@ -67,8 +67,11 @@ purposes. The columns are as follows:
 
 | filename | start seek point | duration of video | output filename |
 | --- | --- | --- | --- |
-| filename1.mp4 | 0 | 60 | newfile
+| filename1.mp4 | 0 | 60 | newfile |
+| myvideo2.mov | 0 | 60 | original |
+| KVF645382D.m4v | 10 | 30 | original |
 
+Use the word 'original' as the output filename to keep the original filename.
 ## Output
 
 The output format is .mov so that iPhone compatibility is at maximum.

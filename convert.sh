@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # SOURCE The config file.
-. ./config
+. ./config.conf
 
 # Read the file and loop over the lines.
 while read -r line

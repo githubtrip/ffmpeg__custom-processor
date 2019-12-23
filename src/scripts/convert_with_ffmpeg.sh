@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # SOURCE The config file.
-. ./config
+. ./config.conf
 
 # ┌─────────────────────────────────────────────────────────────────────────┐ 
 # │                                                                         │░
@@ -64,7 +64,7 @@ INTDURATION=$(($DURATION+3))
 
 # OVERWRITE
 if [ $OVERWRITE = "true" ]; then
-  rm $OUTFOLDER/$OUTPUTBASENAME.out.$OUTFORMAT
+  rm $OUTFOLDER/$OUTPUTBASENAME.$OUTFORMAT
 fi
 
 # Delete the intermediate.
@@ -98,7 +98,7 @@ ffmpeg -hide_banner \
     -c:a copy \
     -t $DURATION \
     -nostdin \
-    -shortest $OUTFOLDER/$OUTPUTBASENAME.out.$OUTFORMAT
+    -shortest $OUTFOLDER/$OUTPUTBASENAME.$OUTFORMAT
 
 # Remove intermediate
 if [ $DELINT = "true" ]; then

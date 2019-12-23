@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # SOURCE The config file.
-. ./config
+. ./config.conf
 
 rm $CSVFILE
 
