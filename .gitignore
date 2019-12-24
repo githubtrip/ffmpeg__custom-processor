@@ -5,4 +5,7 @@ src/intermediate_videos
 *.mp4
 *.m4v
 *.mov
+._.DS_Store
+**/._.DS_Store
 .DS_Store
+**/.DS_Store
