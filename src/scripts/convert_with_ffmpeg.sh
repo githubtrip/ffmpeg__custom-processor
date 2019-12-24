@@ -75,6 +75,10 @@ fi
 # Delete the intermediate.
 rm $INTFOLDER/$OUTPUTBASENAME.int.$OUTFORMAT
 
+# Overlay the watermark for three seconds, but also start include the trimmed start point
+# Otherwise it'll be 3 seconds from the beginning.
+WATERSTART=$(($STARTTIME+3))
+
 # Stage-1
 # ENCODE intermediate video file with watermark over it & scale it down.
 ffmpeg -hide_banner \
@@ -83,7 +87,7 @@ ffmpeg -hide_banner \
     -loop 1 \
     -i $WATERMARK \
     -s 1080x608 \
-    -filter_complex "[0:v] lut3d=$LUT [outlut]; [1:v] fade=out:st=3:d=1:alpha=1 [ov]; [outlut][ov] overlay=0:0 [v]" \
+    -filter_complex "[0:v] lut3d=$LUT [outlut]; [1:v] fade=out:st=$WATERSTART:d=1:alpha=1 [ov]; [outlut][ov] overlay=0:0 [v]" \
     -map "[v]" \
     -map 0:a \
     -c:v libx264 \
