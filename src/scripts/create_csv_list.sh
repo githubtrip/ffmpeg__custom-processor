@@ -8,6 +8,6 @@ rm $CSVFILE
 for ENTRY in "${CSVFOLDER}"/*
 do
   if [[ -f $ENTRY ]]; then
-    printf "$ENTRY, $CSVDEFAULTSTART, $CSVDEFAULTEND, $CSVNEWNAME \n" >> $CSVFILE
+    printf "$ENTRY, $CSVDEFAULTSTART, $CSVDEFAULTEND, $CSVNEWNAME, $CSVLUT \n" >> $CSVFILE
   fi
 done

@@ -13,9 +13,9 @@
 # - 1080x608, 60sec, 30fps
 
 # Take Arguments.
-if [ "$#" -ne 4 ]; then
-  echo "$0 $1 $2 $3 $4"  >&2
-  echo "Usage: $0 FILE START_TIME DURATION OUTPUTFILE" >&2
+if [ "$#" -ne 5 ]; then
+  echo "$0 $1 $2 $3 $4 $5"  >&2
+  echo "Usage: $0 FILE START_TIME DURATION OUTPUTFILE LUTFILE" >&2
   exit 1
 fi
 
@@ -24,14 +24,19 @@ INPUTFILE=${1//,}
 STARTTIME=${2//,}
 DURATION=${3//,}
 OUTPUTFILE=${4//,}
+LUTFILE=${5//,}
 
 # If the specified $OUTPUTFILE doesn't = 'original'
 # Change it to what is specified.
 if [ $OUTPUTFILE = "original" ]; then
   OUTPUTFILE=${INPUTFILE##*/} # filename.ext
 fi
-
 OUTPUTBASENAME=${OUTPUTFILE%.*}    # filename
+
+# LUT File to use, blank is 'nolut'
+if [ "$LUTFILE" != "nolut" ]; then
+  LUT="./src/luts/${LUTFILE}_-_Rec709.3dl"
+fi
 
 # For intermediate, cut down rendering time by having duration+3sec
 # This should be enough for the keyframe issue and freezing the end
@@ -78,7 +83,7 @@ ffmpeg -hide_banner \
     -loop 1 \
     -i $WATERMARK \
     -s 1080x608 \
-    -filter_complex "[1:v] fade=out:st=3:d=1:alpha=1 [ov]; [0:v][ov] overlay=0:0 [v]" \
+    -filter_complex "[0:v] lut3d=$LUT [outlut]; [1:v] fade=out:st=3:d=1:alpha=1 [ov]; [outlut][ov] overlay=0:0 [v]" \
     -map "[v]" \
     -map 0:a \
     -c:v libx264 \
