@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Take Arguments.
+if [ "$#" -ne 1 ]; then
+  echo "Usage: $0 FILE" >&2
+  exit 1
+fi
+
 INPUTFILE=$1
 OUTFOLDER="./2_output_instagram_videos/lut_thumbs"
 LUTFOLDER="./src/luts"
