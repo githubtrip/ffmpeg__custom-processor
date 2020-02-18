@@ -86,7 +86,6 @@ ffmpeg -hide_banner \
     -framerate 59 \
     -loop 1 \
     -i $WATERMARK \
-    -s 1080x608 \
     -filter_complex "[0:v] lut3d=$LUT [outlut]; [1:v] fade=out:st=$WATERSTART:d=1:alpha=1 [ov]; [outlut][ov] overlay=0:0 [v]" \
     -map "[v]" \
     -map 0:a \
