@@ -95,7 +95,7 @@ ffmpeg -hide_banner \
     -nostdin \
     -shortest $INTFOLDER/$OUTPUTBASENAME.int.$OUTFORMAT
 
-# Stage-2
+# Stage-2 - youtube
 # STREAM & Trim/cut the intermediate file to required duration
 # to the output file.
 # This will be a FAST process.
@@ -106,7 +106,20 @@ ffmpeg -hide_banner \
     -c:a copy \
     -t $DURATION \
     -nostdin \
-    -shortest $OUTFOLDER/$OUTPUTBASENAME.$OUTFORMAT
+    -shortest $OUTFOLDER/youtube/$OUTPUTBASENAME.$OUTFORMAT
+
+# Stage-3 - Instagram
+# STREAM & Trim/cut the intermediate file to required duration
+# to the output file.
+# This will be a FAST process.
+ffmpeg -hide_banner \
+    -ss $STARTTIME \
+    -i $INTFOLDER/$OUTPUTBASENAME.int.$OUTFORMAT \
+    -c:a copy \
+    -t $DURATION \
+    -vf scale=1280:720 \
+    -nostdin \
+    -shortest $OUTFOLDER/instagram/$OUTPUTBASENAME.$OUTFORMAT
 
 # Remove intermediate
 if [ $DELINT = "true" ]; then
